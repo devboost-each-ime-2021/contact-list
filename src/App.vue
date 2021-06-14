@@ -1,17 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Agenda</h1>
+    <div class="app-container">
+      <RegisterContact v-on:register="addNewContact" />
+      <ContactList v-bind:contacts="contacts" />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import RegisterContact from '@/components/RegisterContact.vue'
+import ContactList from '@/components/ContactList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    RegisterContact,
+    ContactList,
+  },
+  data: () => ({
+    contacts: []
+  }),
+  methods: {
+    addNewContact(contact) {
+      this.contacts.push(contact)
+    }
   }
 }
 </script>
@@ -24,5 +37,19 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-container {
+  display: flex;
+  width: 70%;
+  justify-content: center;
+}
+
+.app-container form {
+  display: flex;
+  flex-direction: column;
 }
 </style>
